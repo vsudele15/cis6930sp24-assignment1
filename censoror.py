@@ -71,7 +71,7 @@ def process_file(input_file, args):
         #     redacted_text = redacted_text.replace(entity['word'], '█' * len(entity['word']))
         
         # Write redacted text to output file
-        output_file = Path(args.output) / (Path(input_file).stem + '.censored')
+        output_file = Path(args.output) / (Path(input_file).stem + '.censored') 
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write(redacted_text)
         
@@ -88,6 +88,7 @@ def main():
     parser.add_argument("--phones", action="store_true", help="Redact phone numbers")
     parser.add_argument("--address", action="store_true", help="Redact addresses")
     parser.add_argument("--names", action="store_true", help="Redact names")
+    parser.add_argument("--stats", choices=["stdout", "stderr"], default="stdout", help="Output statistics to stdout or stderr")
     args = parser.parse_args()
 
     if not args.input or not args.output:
@@ -106,3 +107,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
