@@ -51,6 +51,24 @@ def redact_text(text, nlp, args):
         text = redact_names(text, nlp)
     return text
 
+def print_stats(output_type):
+    stats_file = "tmp/tempStats.txt"
+    try:
+        with open(stats_file, 'r') as stats_output:
+            if output_type == "stdout":
+                print(stats_output.read())
+            elif output_type == "stderr":
+                print(stats_output.read(), file=sys.stderr)
+            else:
+                with open(output_type, 'w') as custom_output_file:
+                    custom_output_file.write(stats_output.read())
+        os.remove(stats_file)
+
+
+    except Exception as e:
+        print(f"Error printing statistics: {e}")
+
+
 def process_file(input_file, args):
     try:
         with open(input_file, 'r', encoding='utf-8') as f:
@@ -88,7 +106,7 @@ def main():
     parser.add_argument("--phones", action="store_true", help="Redact phone numbers")
     parser.add_argument("--address", action="store_true", help="Redact addresses")
     parser.add_argument("--names", action="store_true", help="Redact names")
-    parser.add_argument("--stats", choices=["stdout", "stderr"], default="stdout", help="Output statistics to stdout or stderr")
+    parser.add_argument("--stats", choices=["stdout", "stderr", "file"], default="stdout", help="Output statistics to stdout, stderr, or a file")
     args = parser.parse_args()
 
     if not args.input or not args.output:
