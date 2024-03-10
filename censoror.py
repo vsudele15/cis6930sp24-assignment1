@@ -41,13 +41,13 @@ def redact_names(text, nlp):
     return redacted_text
 
 def redact_text(text, nlp, args):
-    if args.date:
+    if args.dates:
         text = redact_dates(text, nlp)
-    if args.phone:
+    if args.phones:
         text = redact_phones(text, nlp)
     if args.address:
         text = redact_addresses(text, nlp)
-    if args.name:
+    if args.names:
         text = redact_names(text, nlp)
     return text
 
@@ -84,10 +84,10 @@ def main():
     parser = argparse.ArgumentParser(description="Text redaction tool")
     parser.add_argument("--input", help="Input file(s) to process (glob pattern)")
     parser.add_argument("--output", help="Output directory for redacted files")
-    parser.add_argument("--date", action="store_true", help="Redact dates")
-    parser.add_argument("--phone", action="store_true", help="Redact phone numbers")
+    parser.add_argument("--dates", action="store_true", help="Redact dates")
+    parser.add_argument("--phones", action="store_true", help="Redact phone numbers")
     parser.add_argument("--address", action="store_true", help="Redact addresses")
-    parser.add_argument("--name", action="store_true", help="Redact names")
+    parser.add_argument("--names", action="store_true", help="Redact names")
     args = parser.parse_args()
 
     if not args.input or not args.output:
