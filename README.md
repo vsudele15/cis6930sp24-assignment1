@@ -1,8 +1,21 @@
 __Name: Vaidehi Sudele__
 __ASSIGNMENT DESCRIPTION:__ THIS IS ASSIGNMENT 1 IN THE CIS6930 DATA ENGINEERING COURSE. THIS ASSIGNMENT FOCUSES ON READCTING SENSITIVE INFORMATION SUCH AS NAMES, DATES, PHONES, ADDRESSE FROM A GIVEN TEXT FILE. A TEXT FILE I GIVEN AS INPUT WITH SOME FLAGS AND THE PROGRAM GIVES OUTPUT AS A FILE WITH EXTENSION .censored 
 
+__REQUIREMENTS:__
+- Python 3.11
+- pipenv
 __RUNNING INSTRUCTIONS:__
+1. Clone the repository
 
+2. Navigate to the project directory:
+
+3. Install dependencies using Pipenv: pipenv install
+
+__COMMAND TO RUN:__
+pipenv run python censoror.py --input '*.txt' \
+                    --names --dates --phones --address\
+                    --output 'files/' \
+                    --stats stderr
 __BUGS AND ASSUMPTIONS:__
 
 __FUNCTION DESCRIPTION:__ (1.) redact_dates(text, nlp): This function takes two parameters: text, which is the input text containing dates to be redacted, and nlp, which is a spaCy NLP pipeline object initialized with a model that includes entity recognition capabilities. The function processes the input text using the provided spaCy NLP pipeline to identify entities. It then iterates through each identified entity and checks if its label is "DATE". If it is, the function replaces the text of that entity with a series of black bars (█) of the same length. Finally, it returns the redacted text.
